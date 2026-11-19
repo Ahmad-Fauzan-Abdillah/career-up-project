@@ -1,0 +1,3 @@
+@extends('errors.layout')
+@section('code', '419')
+@section('message', 'Sesi telah berakhir')
