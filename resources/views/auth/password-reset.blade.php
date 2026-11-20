@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="space-y-5">
-    <div><h1 class="font-serif text-3xl font-bold text-white">Atur ulang kata sandi</h1><p class="mt-2 text-sm text-[#F5F3EE]/80">Masukkan kata sandi baru untuk akun Anda.</p></div>
+    <div><h1 class="font-heading text-3xl font-bold text-white">Atur ulang kata sandi</h1><p class="mt-2 text-sm text-[#F5F3EE]/80">Masukkan kata sandi baru untuk akun Anda.</p></div>
     <form method="POST" action="{{ route('password.update') }}" class="space-y-4">@csrf
         <input type="hidden" name="token" value="{{ $token }}">
         <label class="block text-sm font-semibold text-white" for="email">Email</label>

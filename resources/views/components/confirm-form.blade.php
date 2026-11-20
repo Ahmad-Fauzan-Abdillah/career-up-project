@@ -20,7 +20,7 @@
         @keydown.escape.window="$refs.confirm.close()"
         class="w-[calc(100%-2rem)] max-w-md rounded-panel border border-brand-line bg-white p-0 text-slate-800 shadow-float backdrop:bg-slate-950/50">
         <div class="p-6">
-            <h2 class="font-serif text-xl font-bold text-brand-teal">{{ $label }}?</h2>
+            <h2 class="font-heading text-xl font-bold text-brand-teal">{{ $label }}?</h2>
             <p class="mt-2 text-sm leading-6 text-slate-600">{{ $message }}</p>
             <div class="mt-6 flex justify-end gap-3">
                 <x-button type="button" variant="secondary" @click="$refs.confirm.close()">Batal</x-button>

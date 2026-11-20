@@ -16,7 +16,7 @@
 
     <section class="grid gap-5 md:grid-cols-2">
         <article class="cu-card p-5 sm:p-6">
-            <h2 class="font-serif text-xl font-bold text-brand-teal">Informasi pelamar</h2>
+            <h2 class="font-heading text-xl font-bold text-brand-teal">Informasi pelamar</h2>
             <dl class="mt-4 space-y-3 text-sm">
                 <div><dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Email</dt><dd class="mt-1 text-slate-800">{{ $application->email }}</dd></div>
                 <div><dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Telepon</dt><dd class="mt-1 text-slate-800">{{ $application->phone }}</dd></div>
@@ -25,7 +25,7 @@
             </dl>
         </article>
         <article class="cu-card p-5 sm:p-6">
-            <h2 class="font-serif text-xl font-bold text-brand-teal">Status lamaran</h2>
+            <h2 class="font-heading text-xl font-bold text-brand-teal">Status lamaran</h2>
             <div class="mt-3"><x-badge :variant="match($application->status) { 'Diterima' => 'success', 'Diproses' => 'warning', default => 'danger' }" size="lg">{{ $application->status }}</x-badge></div>
             @if($application->notes)
                 <p class="mt-4 whitespace-pre-line text-sm leading-6 text-slate-700">{{ $application->notes }}</p>
@@ -34,7 +34,7 @@
     </section>
 
     <section class="cu-card p-5 sm:p-6">
-        <h2 class="font-serif text-xl font-bold text-brand-teal">Profil dan keterampilan</h2>
+        <h2 class="font-heading text-xl font-bold text-brand-teal">Profil dan keterampilan</h2>
         <p class="mt-3 whitespace-pre-line text-sm leading-6 text-slate-700">{{ $application->user->bio ?: 'Belum ada ringkasan profil.' }}</p>
         <div class="mt-4 flex flex-wrap gap-2">
             @forelse($application->user->skills as $skill)
@@ -47,7 +47,7 @@
 
     <section class="grid gap-5 md:grid-cols-2">
         <article class="cu-card p-5 sm:p-6">
-            <h2 class="font-serif text-xl font-bold text-brand-teal">Pendidikan</h2>
+            <h2 class="font-heading text-xl font-bold text-brand-teal">Pendidikan</h2>
             <div class="mt-4 space-y-4">
                 @forelse($application->user->educations as $education)
                     <div class="border-l-2 border-brand-teal/20 pl-4">
@@ -60,7 +60,7 @@
             </div>
         </article>
         <article class="cu-card p-5 sm:p-6">
-            <h2 class="font-serif text-xl font-bold text-brand-teal">Pengalaman</h2>
+            <h2 class="font-heading text-xl font-bold text-brand-teal">Pengalaman</h2>
             <div class="mt-4 space-y-4">
                 @forelse($application->user->experiences as $experience)
                     <div class="border-l-2 border-brand-teal/20 pl-4">
@@ -75,13 +75,13 @@
         </article>
     </section>
 
-    <form method="POST" action="{{ route('admin.applications.update', $application) }}" class="cu-card space-y-4 p-5 sm:p-6">
+    <form method="POST" action="{{ route('admin.applications.update', $application) }}" class="cu-card grid gap-3 p-4 sm:grid-cols-2">
         @csrf
         @method('PATCH')
-        <h2 class="font-serif text-xl font-bold text-brand-teal">Perbarui status lamaran</h2>
+        <h2 class="font-heading text-xl font-bold text-brand-teal sm:col-span-2">Perbarui status lamaran</h2>
         <x-select name="status" label="Status" :selected="$application->status" :options="['Diproses' => 'Diproses', 'Diterima' => 'Diterima', 'Ditolak' => 'Ditolak', 'Dibatalkan' => 'Dibatalkan']" />
         <x-textarea name="notes" label="Catatan admin" :value="$application->notes" rows="4" />
-        <x-button type="submit" variant="primary">Simpan perubahan</x-button>
+        <div class="sm:col-span-2"><x-button type="submit" variant="primary">Simpan perubahan</x-button></div>
     </form>
 </div>
 @endsection

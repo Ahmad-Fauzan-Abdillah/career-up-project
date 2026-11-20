@@ -14,17 +14,18 @@
     <meta property="og:image" content="{{ asset('images/logo.png') }}">
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
 
+    @include('components.font-preload')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-[#F5F3EE] font-sans text-slate-800 antialiased selection:bg-[#F4A261] selection:text-[#124143]" x-data="{ mobileMenuOpen: false }">
     <x-toast />
     <!-- Navbar Deep Teal Sticky (Matches 01-landing-hero.png) -->
     <header class="sticky top-0 z-50 bg-[#124143] text-[#F5F3EE] shadow-md border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
+        <div class="x-container">
+            <div class="flex items-center justify-between h-16">
                 <!-- Logo CareerUp -->
-                <a href="{{ route('landing') }}">
-                    <x-logo variant="light" />
+                <a href="{{ route('landing') }}" class="font-heading text-2xl font-bold tracking-tight text-white">
+                    CareerUp
                 </a>
 
                 <!-- Desktop Navigation Links (Anchor smooth scroll) -->
@@ -58,7 +59,7 @@
                         aria-controls="guest-menu"
                         class="p-2 rounded-xl text-slate-200 hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#F4A261]"
                         aria-label="Buka menu navigasi">
-                        <svg x-show="!mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg x-show="!mobileMenuOpen" x-cloak class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                         <svg x-show="mobileMenuOpen" x-cloak class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -108,23 +109,19 @@
     </main>
 
     <!-- Footer (Matches 06-landing-fitur-dan-footer.png) -->
-    <footer class="bg-[#124143] text-slate-300 border-t border-white/10 py-12 sm:py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-10">
-                <!-- Col 1: Logo & Tagline (5 cols) -->
-                <div class="md:col-span-5 space-y-4">
-                    <a href="{{ route('landing') }}">
-                        <x-logo variant="light" size="lg" />
-                    </a>
-                    <p class="text-sm leading-6 text-slate-300 max-w-sm">
+    <footer class="bg-[#124143] text-slate-300 border-t border-white/10 py-6 sm:py-8">
+        <div class="x-container">
+            <div class="mb-6 grid gap-6 sm:grid-cols-3">
+                <div class="space-y-3">
+                    <a href="{{ route('landing') }}" class="font-heading text-xl font-bold text-white">CareerUp</a>
+                    <p class="max-w-sm text-sm leading-6 text-slate-300">
                         Ruang untuk menemukan peluang karier, mengembangkan keterampilan, dan mengambil langkah berikutnya.
                     </p>
                 </div>
 
-                <!-- Col 2: Menu (2 cols) -->
-                <div class="md:col-span-2">
-                    <h5 class="font-serif text-white font-bold text-base mb-3">Menu</h5>
-                    <ul class="space-y-2 text-xs sm:text-sm">
+                <div>
+                    <h5 class="font-heading text-white font-bold text-base mb-3">Menu</h5>
+                    <ul class="space-y-2 text-sm">
                         <li><a href="{{ route('landing') }}#lowongan" class="hover:text-white transition-colors">Lowongan</a></li>
                         <li><a href="{{ route('landing') }}#magang" class="hover:text-white transition-colors">Magang</a></li>
                         <li><a href="{{ route('landing') }}#pelatihan" class="hover:text-white transition-colors">Pelatihan</a></li>
@@ -132,9 +129,8 @@
                     </ul>
                 </div>
 
-                <!-- Col 3: Akun -->
-                <div class="md:col-span-2">
-                    <h5 class="mb-3 font-serif text-base font-bold text-white">Akun</h5>
+                <div>
+                    <h5 class="mb-3 font-heading text-base font-bold text-white">Akun</h5>
                     <ul class="space-y-2 text-sm">
                         <li><a href="{{ route('login') }}" class="hover:text-white">Masuk</a></li>
                         <li><a href="{{ route('register') }}" class="hover:text-white">Buat akun</a></li>
@@ -142,17 +138,9 @@
                     </ul>
                 </div>
 
-                <!-- Col 4: Panduan -->
-                <div class="md:col-span-3 space-y-3">
-                    <h5 class="font-serif text-base font-bold text-white">Mulai jelajahi</h5>
-                    <p class="max-w-xs text-sm leading-6 text-slate-300">
-                        Cari pekerjaan, magang, atau kelas yang sesuai dengan minat dan tujuan kariermu.
-                    </p>
-                    <a href="{{ route('lowongan.index') }}" class="inline-flex rounded-lg font-semibold text-brand-peach hover:text-amber-200">Lihat lowongan <span aria-hidden="true" class="ml-1">→</span></a>
-                </div>
             </div>
 
-            <div class="pt-8 border-t border-white/10 text-center text-xs text-slate-400">
+            <div class="border-t border-white/10 pt-4 text-center text-xs text-slate-400">
                 &copy; {{ date('Y') }} CareerUp Indonesia. Seluruh hak cipta dilindungi undang-undang.
             </div>
         </div>

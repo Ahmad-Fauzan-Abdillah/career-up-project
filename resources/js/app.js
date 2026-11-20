@@ -1,13 +1,6 @@
 import './bootstrap';
 import Alpine from 'alpinejs';
 import Chart from 'chart.js/auto';
-import '@fontsource/playfair-display/600.css';
-import '@fontsource/playfair-display/700.css';
-import '@fontsource/playfair-display/800.css';
-import '@fontsource/plus-jakarta-sans/400.css';
-import '@fontsource/plus-jakarta-sans/500.css';
-import '@fontsource/plus-jakarta-sans/600.css';
-import '@fontsource/plus-jakarta-sans/700.css';
 
 window.Alpine = Alpine;
 

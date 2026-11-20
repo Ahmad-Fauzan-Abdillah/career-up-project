@@ -45,7 +45,7 @@
                     </svg>
                 </span>
                 <div>
-                    <h2 class="font-serif text-xl font-bold text-[#124143]">Lamaran Terkirim</h2>
+                    <h2 class="font-heading text-xl font-bold text-[#124143]">Lamaran Terkirim</h2>
                     <p class="mt-2 text-sm text-slate-600">{{ $application->created_at->locale('id')->translatedFormat('d F Y') }}</p>
                 </div>
             @endif
@@ -53,7 +53,7 @@
     </section>
 
     <section class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 class="mb-5 font-serif text-xl font-bold text-[#124143]">Informasi Lamaran</h2>
+        <h2 class="mb-5 font-heading text-xl font-bold text-[#124143]">Informasi Lamaran</h2>
         <dl class="grid gap-5 sm:grid-cols-2">
             <div>
                 <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Tanggal Daftar</dt>
@@ -81,7 +81,7 @@
     </section>
 
     <section class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 class="mb-3 font-serif text-xl font-bold text-[#124143]">Catatan</h2>
+        <h2 class="mb-3 font-heading text-xl font-bold text-[#124143]">Catatan</h2>
         <p class="text-sm leading-relaxed text-slate-600">{{ $application->notes ?: 'Admin belum menambahkan catatan.' }}</p>
     </section>
     <div class="flex flex-wrap gap-3">

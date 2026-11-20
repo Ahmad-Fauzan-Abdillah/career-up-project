@@ -1,7 +1,7 @@
 @props([
     'variant' => 'white',
     'hover' => false,
-    'padding' => 'p-6',
+    'padding' => 'p-4',
     'rounded' => 'rounded-panel',
     'as' => 'div',
 ])

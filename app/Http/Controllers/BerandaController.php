@@ -13,13 +13,13 @@ class BerandaController extends Controller
      */
     public function index(): View
     {
-        $latestJobs = JobListing::published()->lowongan()->latest()->take(3)->get();
-        $internships = JobListing::published()->magang()->latest()->take(2)->get();
+        $latestJobs = JobListing::published()->lowongan()->latest()->take(8)->get();
+        $internships = JobListing::published()->magang()->latest()->take(8)->get();
         $popularTrainings = Training::published()
             ->whereDate('schedule_date', '>=', today())
             ->withCount('enrollments')
             ->orderBy('schedule_date')
-            ->take(2)
+            ->take(8)
             ->get();
 
         $user = auth()->user();

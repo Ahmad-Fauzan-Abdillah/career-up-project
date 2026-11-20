@@ -30,9 +30,9 @@
     </details>
 
     @if($jobs->isNotEmpty())
-        <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <div class="{{ $type === 'magang' ? 'grid gap-4 md:grid-cols-2 xl:grid-cols-3' : 'space-y-3' }}">
             @foreach($jobs as $job)
-                <x-job-card :job="$job" />
+                <x-job-card :job="$job" :layout="$type === 'magang' ? 'landing' : 'listing'" />
             @endforeach
         </div>
     @else

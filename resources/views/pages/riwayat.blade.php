@@ -46,7 +46,7 @@
                                     @endif
                                 </div>
                                 <div class="min-w-0">
-                                    <h2 class="truncate font-serif text-lg font-bold text-brand-teal">{{ $application->jobListing->title }}</h2>
+                                    <h2 class="truncate font-heading text-lg font-bold text-brand-teal">{{ $application->jobListing->title }}</h2>
                                     <p class="mt-1 text-sm text-slate-600">{{ $application->jobListing->company_name }}</p>
                                     <time class="mt-1 block text-xs text-slate-500" datetime="{{ $application->created_at->toIso8601String() }}">
                                         Dikirim {{ $application->created_at->locale('id')->diffForHumans() }}

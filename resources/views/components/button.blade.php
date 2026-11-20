@@ -8,7 +8,7 @@
 ])
 
 @php
-    $baseClasses = 'inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 active:translate-y-px disabled:pointer-events-none disabled:opacity-55';
+    $baseClasses = 'inline-flex min-h-10 items-center justify-center gap-2 rounded-xl font-semibold transition duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 active:translate-y-px disabled:pointer-events-none disabled:opacity-55';
     $sizeClasses = [
         'sm' => 'px-3.5 py-2 text-xs',
         'md' => 'px-5 py-2.5 text-sm',

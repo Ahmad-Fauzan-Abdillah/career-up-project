@@ -50,7 +50,7 @@
                         </span>
                     @endif
                     <span class="block text-xs font-bold tracking-widest text-[#124143]">{{ $details['name'] }}</span>
-                    <span class="mt-4 block font-serif text-3xl font-bold text-slate-900">{{ $details['price'] }}</span>
+                    <span class="mt-4 block font-heading text-3xl font-bold text-slate-900">{{ $details['price'] }}</span>
                     <span class="text-sm text-slate-500">{{ $details['period'] }}</span>
                     <span class="mt-5 block space-y-3">
                         @foreach($benefits as $benefit)
@@ -67,7 +67,7 @@
         </div>
 
         <section class="cu-card p-5 sm:p-6">
-            <h2 class="font-serif text-xl font-bold text-[#124143]">Metode Pembayaran</h2>
+            <h2 class="font-heading text-xl font-bold text-[#124143]">Metode Pembayaran</h2>
             <label class="mt-4 flex cursor-pointer items-center gap-4 rounded-xl border border-[#124143] bg-[#124143]/5 p-4">
                 <input type="radio" name="payment_method" value="QRIS" checked disabled class="h-5 w-5 accent-[#124143]">
                 <span class="flex h-10 w-16 items-center justify-center rounded bg-white text-lg font-black italic text-[#124143]">QRIS</span>

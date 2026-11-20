@@ -14,7 +14,7 @@
             <circle cx="12" cy="12" r="9" stroke-width="2" /><path stroke-linecap="round" stroke-width="2" d="M12 7v5l3 2" />
         </svg>
     </span>
-    <h1 class="mt-5 font-serif text-3xl font-bold text-[#124143]">{{ match($subscription->status) {
+    <h1 class="mt-5 font-heading text-3xl font-bold text-[#124143]">{{ match($subscription->status) {
         'aktif' => 'Langganan Aktif',
         'ditolak' => 'Pembayaran Ditolak',
         'kedaluwarsa' => 'Langganan Kedaluwarsa',
@@ -33,7 +33,7 @@
     </p>
 
     <section class="mt-8 rounded-2xl bg-[#F5F3EE] p-5 text-left sm:p-6">
-        <h2 class="font-serif text-xl font-bold text-[#124143]">Detail Langganan</h2>
+        <h2 class="font-heading text-xl font-bold text-[#124143]">Detail Langganan</h2>
         <dl class="mt-5 space-y-4 text-sm">
             <div class="flex justify-between gap-4">
                 <dt class="text-slate-500">Pelatihan</dt>

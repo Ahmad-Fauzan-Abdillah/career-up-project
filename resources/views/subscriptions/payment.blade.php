@@ -10,7 +10,7 @@
 
     <div class="grid items-start gap-6 lg:grid-cols-2">
         <section class="cu-card p-6">
-            <h2 class="font-serif text-xl font-bold text-[#124143]">Ringkasan Pembayaran</h2>
+            <h2 class="font-heading text-xl font-bold text-[#124143]">Ringkasan Pembayaran</h2>
             <dl class="mt-6 space-y-4 text-sm">
                 <div class="flex justify-between gap-4">
                     <dt class="text-slate-500">Pelatihan</dt>
@@ -36,7 +36,7 @@
         </section>
 
         <section class="cu-card p-6 text-center">
-            <h2 class="font-serif text-xl font-bold text-[#124143]">Pembayaran QRIS</h2>
+            <h2 class="font-heading text-xl font-bold text-[#124143]">Pembayaran QRIS</h2>
             <div class="mx-auto mt-5 flex max-w-sm flex-col items-center rounded-2xl bg-white p-5">
                 <img src="{{ asset($payment['image']) }}" alt="Kode QRIS CareerUp" class="h-56 w-56 object-contain">
                 <p class="mt-3 text-sm font-bold tracking-wide text-slate-800">Rp {{ number_format($amount, 0, ',', '.') }}</p>

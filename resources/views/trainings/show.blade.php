@@ -25,7 +25,7 @@
     <div class="grid items-start gap-6 lg:grid-cols-12">
         <article class="cu-card min-w-0 overflow-hidden lg:col-span-8">
             @if($thumbnail)
-                <img src="{{ $thumbnail }}" alt="{{ $training->title }}" class="max-h-[28rem] w-full object-cover">
+                <img src="{{ $thumbnail }}" alt="{{ $training->title }}" class="aspect-[16/9] max-h-[28rem] w-full object-cover">
             @endif
             <div class="space-y-8 p-5 sm:p-8">
                 <header>
@@ -42,18 +42,18 @@
                             <x-badge variant="danger">Kuota penuh</x-badge>
                         @endif
                     </div>
-                    <h1 class="font-serif text-3xl font-bold leading-tight text-brand-teal sm:text-4xl">{{ $training->title }}</h1>
+                    <h1 class="font-heading text-3xl font-bold leading-tight text-brand-teal sm:text-4xl">{{ $training->title }}</h1>
                     <p class="mt-3 text-sm text-slate-600">{{ $training->formatted_schedule_date }} @if($training->formatted_schedule_time) · {{ $training->formatted_schedule_time }} @endif</p>
                 </header>
 
                 <section>
-                    <h2 class="font-serif text-xl font-bold text-brand-teal">Tentang pelatihan</h2>
+                    <h2 class="font-heading text-xl font-bold text-brand-teal">Tentang pelatihan</h2>
                     <p class="mt-3 whitespace-pre-line text-sm leading-7 text-slate-700">{{ $training->description }}</p>
                 </section>
 
                 @if(filled($training->syllabus))
                     <section>
-                        <h2 class="font-serif text-xl font-bold text-brand-teal">Materi yang dipelajari</h2>
+                        <h2 class="font-heading text-xl font-bold text-brand-teal">Materi yang dipelajari</h2>
                         <ul class="mt-3 space-y-3">
                             @foreach(preg_split('/\r\n|\r|\n/', $training->syllabus) as $material)
                                 @if(trim($material) !== '')
@@ -68,7 +68,7 @@
                 @endif
 
                 <section class="rounded-xl bg-brand-cream p-5">
-                    <h2 class="font-serif text-lg font-bold text-brand-teal">Mentor</h2>
+                    <h2 class="font-heading text-lg font-bold text-brand-teal">Mentor</h2>
                     <div class="mt-4 flex items-center gap-3">
                         @if($training->mentor_avatar)
                             <img src="{{ asset('storage/'.$training->mentor_avatar) }}" alt="Foto {{ $training->mentor_name }}" class="h-12 w-12 rounded-full object-cover">
@@ -86,7 +86,7 @@
 
         <aside class="lg:sticky lg:top-24 lg:col-span-4">
             <div class="cu-card p-5 sm:p-6">
-                <h2 class="font-serif text-xl font-bold text-brand-teal">Informasi kelas</h2>
+                <h2 class="font-heading text-xl font-bold text-brand-teal">Informasi kelas</h2>
                 <dl class="mt-5 space-y-4">
                     <div>
                         <dt class="text-xs font-semibold uppercase tracking-wide text-slate-500">Jadwal</dt>

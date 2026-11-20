@@ -22,7 +22,7 @@
         </svg>
     </div>
     <!-- Brand Wordmark -->
-    <span class="font-serif {{ $textSize }} font-bold tracking-tight {{ $textClasses }}">
+    <span class="font-heading {{ $textSize }} font-bold tracking-tight {{ $textClasses }}">
         CareerUp
     </span>
 </div>

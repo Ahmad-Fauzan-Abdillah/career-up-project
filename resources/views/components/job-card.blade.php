@@ -21,8 +21,8 @@
     $daysRemaining = $job->deadline ? today()->diffInDays($job->deadline, false) : null;
 @endphp
 
-<a href="{{ $url }}" class="group flex h-full flex-col rounded-panel border border-brand-line bg-white p-5 shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-teal-200 hover:shadow-float focus-visible:outline-brand-teal sm:p-6">
-    <div class="flex items-start gap-4">
+<a href="{{ $url }}" class="group h-full rounded-panel border border-brand-line bg-white p-4 shadow-card transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-0.5 hover:border-teal-200 hover:shadow-float focus-visible:outline-brand-teal sm:p-5 {{ $layout === 'listing' ? 'x-job-row' : 'flex flex-col' }} {{ $layout === 'beranda' ? 'x-scroll-card' : '' }}">
+    <div class="x-job-row__header flex items-start gap-4">
         <div class="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-slate-100 bg-brand-cream text-sm font-bold text-brand-teal">
             @if($job->company_logo)
                 <img src="{{ asset('storage/'.$job->company_logo) }}" alt="Logo {{ $job->company_name }}" class="h-full w-full object-contain">
@@ -31,7 +31,7 @@
             @endif
         </div>
         <div class="min-w-0 flex-1">
-            <h3 class="line-clamp-2 font-serif text-lg font-bold leading-snug text-brand-teal group-hover:underline">{{ $job->title }}</h3>
+            <h3 class="line-clamp-2 font-heading text-lg font-bold leading-snug text-brand-teal group-hover:underline">{{ $job->title }}</h3>
             <p class="mt-1 truncate text-sm font-medium text-slate-700">{{ $job->company_name }}</p>
         </div>
         @if($job->is_featured)
@@ -39,7 +39,7 @@
         @endif
     </div>
 
-    <div class="mt-4 flex flex-wrap gap-2">
+    <div class="x-job-row__badges {{ $layout === 'listing' ? '' : 'mt-4' }} flex flex-wrap gap-2">
         <x-badge :variant="$job->type === 'magang' ? 'magang' : 'lowongan'" size="sm">
             {{ $job->type === 'magang' ? 'Magang' : 'Lowongan' }}
         </x-badge>
@@ -51,7 +51,7 @@
         @endif
     </div>
 
-    <dl class="mt-5 grid gap-3 text-sm text-slate-600">
+    <dl class="x-job-row__details {{ $layout === 'listing' ? '' : 'mt-5' }} grid gap-3 text-sm text-slate-600">
         <div class="flex items-center gap-2">
             <svg class="h-4 w-4 shrink-0 text-brand-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 21s7-5.2 7-11a7 7 0 10-14 0c0 5.8 7 11 7 11z" />
@@ -62,7 +62,6 @@
         </div>
         @if($job->type === 'magang' && $job->duration)
             <div class="flex items-center gap-2">
-                <span class="font-semibold text-brand-teal" aria-hidden="true">↗</span>
                 <dt class="sr-only">Durasi</dt>
                 <dd>{{ $job->duration }}</dd>
             </div>
@@ -76,7 +75,7 @@
         @endif
     </dl>
 
-    <div class="mt-auto flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-4 mt-5 text-xs">
+    <div class="x-job-row__footer {{ $layout === 'listing' ? '' : 'mt-auto mt-5 border-t border-slate-100 pt-4' }} flex flex-wrap items-center justify-between gap-3 text-xs">
         @if($job->deadline)
             <div class="text-slate-600">
                 <span class="{{ $job->isClosed() ? 'font-semibold text-rose-800' : 'font-semibold text-brand-teal' }}">
@@ -87,6 +86,6 @@
         @else
             <time class="text-slate-500" datetime="{{ $job->created_at->toIso8601String() }}">Diposting {{ $job->created_at->locale('id')->diffForHumans() }}</time>
         @endif
-        <span class="font-bold text-brand-teal group-hover:underline">Lihat detail <span aria-hidden="true">→</span></span>
+        <span class="font-bold text-brand-teal group-hover:underline">Lihat detail</span>
     </div>
 </a>

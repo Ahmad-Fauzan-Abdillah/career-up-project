@@ -9,7 +9,7 @@
 }">
     <!-- Header -->
     <div class="mb-6">
-        <h1 class="font-serif text-3xl font-bold text-white tracking-tight">Daftar</h1>
+        <h1 class="font-heading text-3xl font-bold text-white tracking-tight">Daftar</h1>
         <p class="mt-1 text-sm text-[#F5F3EE]/80">Buat akun baru</p>
     </div>
 
@@ -23,7 +23,7 @@
                 type="button"
                 @click="role = 'pengguna'"
                 :class="role === 'pengguna' ? 'bg-[#F5F3EE] text-[#124143] shadow-md font-semibold' : 'text-[#F5F3EE]/70 hover:text-white font-medium'"
-                class="py-2.5 px-4 rounded-lg text-sm transition-all duration-200 text-center flex items-center justify-center gap-2">
+                class="py-2.5 px-4 rounded-lg text-sm transition-[opacity,transform] duration-200 text-center flex items-center justify-center gap-2">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
@@ -33,7 +33,7 @@
                 type="button"
                 @click="role = 'admin'"
                 :class="role === 'admin' ? 'bg-[#F5F3EE] text-[#124143] shadow-md font-semibold' : 'text-[#F5F3EE]/70 hover:text-white font-medium'"
-                class="py-2.5 px-4 rounded-lg text-sm transition-all duration-200 text-center flex items-center justify-center gap-2">
+                class="py-2.5 px-4 rounded-lg text-sm transition-[opacity,transform] duration-200 text-center flex items-center justify-center gap-2">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
@@ -131,7 +131,7 @@
                     @click="showPassword = !showPassword"
                     class="absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-300 hover:text-white transition-colors"
                     aria-label="Toggle password visibility">
-                    <svg x-show="!showPassword" class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg x-show="!showPassword" x-cloak class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                     </svg>
@@ -150,7 +150,7 @@
         <div class="pt-2">
             <button
                 type="submit"
-                class="w-full flex justify-center items-center py-3 px-4 rounded-xl shadow-lg bg-[#F5F3EE] hover:bg-white text-[#124143] text-sm font-bold tracking-wide uppercase transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F4A261] focus:ring-offset-[#124143]">
+                class="w-full flex justify-center items-center py-3 px-4 rounded-xl shadow-lg bg-[#F5F3EE] hover:bg-white text-[#124143] text-sm font-bold tracking-wide uppercase transition-[opacity,transform] duration-200 transform hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F4A261] focus:ring-offset-[#124143]">
                 Daftar
             </button>
         </div>

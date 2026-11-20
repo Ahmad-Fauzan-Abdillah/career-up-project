@@ -3,10 +3,10 @@
 @section('title', 'Beranda')
 
 @section('content')
-<div class="space-y-10">
+<div class="space-y-6">
     <x-page-header
-        :title="'Selamat datang, '.$user->name"
-        description="Lanjutkan langkahmu menuju peluang karier berikutnya."
+        title="Beranda"
+        :description="'Selamat datang, '.$user->name.'.'"
         eyebrow="Beranda">
         <x-slot:actions>
             <x-button as="a" :href="route('profil.edit')" variant="primary">Lengkapi profil</x-button>
@@ -20,93 +20,96 @@
         </div>
     @endunless
 
-    <section class="grid gap-4 sm:grid-cols-2">
-        <a href="{{ route('profil.edit') }}" class="cu-card block p-5 transition hover:border-teal-300 sm:p-6">
-            <div class="flex items-start justify-between gap-4">
-                <div>
-                    <p class="text-sm font-bold text-brand-teal">Kelengkapan profil</p>
-                    <p class="mt-1 text-sm text-slate-600">
-                        @if($profileCompleteness === 100)
-                            Profilmu sudah lengkap.
-                        @else
-                            Tambahkan informasi agar profil siap digunakan.
-                        @endif
-                    </p>
-                </div>
-                <span class="font-serif text-2xl font-bold text-brand-teal">{{ $profileCompleteness }}%</span>
-            </div>
-            <div class="mt-4 h-2 overflow-hidden rounded-full bg-slate-100" role="progressbar" aria-label="Kelengkapan profil" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ $profileCompleteness }}">
-                <span class="block h-full rounded-full bg-brand-teal transition-all" style="width: {{ $profileCompleteness }}%"></span>
-            </div>
+    <section class="grid grid-cols-3 gap-2 sm:gap-4">
+        <a href="{{ route('profil.edit') }}" class="x-card flex min-w-0 items-center justify-between gap-2 p-3 transition-colors hover:border-teal-300 sm:p-4">
+            <span class="text-xs font-semibold leading-5 text-brand-teal sm:text-sm">Kelengkapan profil</span>
+            <span class="font-heading text-xl font-bold text-brand-teal">{{ $profileCompleteness }}%</span>
         </a>
-        <div class="grid grid-cols-2 gap-4">
-            <a href="{{ route('riwayat.index') }}" class="cu-card p-5 transition hover:border-teal-300">
-                <p class="text-sm text-slate-600">Lamaran diproses</p>
-                <p class="mt-2 font-serif text-3xl font-bold text-brand-teal">{{ number_format($activeApplicationsCount) }}</p>
-                <span class="mt-2 block text-xs font-semibold text-brand-teal">Lihat riwayat <span aria-hidden="true">→</span></span>
-            </a>
-            <a href="{{ route('notifikasi.index') }}" class="cu-card p-5 transition hover:border-teal-300">
-                <p class="text-sm text-slate-600">Notifikasi baru</p>
-                <p class="mt-2 font-serif text-3xl font-bold text-brand-teal">{{ number_format($unreadNotificationsCount) }}</p>
-                <span class="mt-2 block text-xs font-semibold text-brand-teal">Lihat notifikasi <span aria-hidden="true">→</span></span>
-            </a>
-        </div>
+        <a href="{{ route('riwayat.index') }}" class="x-card flex min-w-0 items-center justify-between gap-2 p-3 transition-colors hover:border-teal-300 sm:p-4">
+            <span class="text-xs font-semibold leading-5 text-brand-teal sm:text-sm">Lamaran aktif</span>
+            <span class="font-heading text-xl font-bold text-brand-teal">{{ number_format($activeApplicationsCount) }}</span>
+        </a>
+        <a href="{{ route('notifikasi.index') }}" class="x-card flex min-w-0 items-center justify-between gap-2 p-3 transition-colors hover:border-teal-300 sm:p-4">
+            <span class="text-xs font-semibold leading-5 text-brand-teal sm:text-sm">Notifikasi baru</span>
+            <span class="font-heading text-xl font-bold text-brand-teal">{{ number_format($unreadNotificationsCount) }}</span>
+        </a>
     </section>
 
-    @unless($hasCareerActivity)
-        <section class="rounded-panel border border-brand-line bg-white p-6 sm:p-8">
-            <p class="text-xs font-bold uppercase tracking-[.14em] text-brand-peach-dark">Mulai di sini</p>
-            <h2 class="mt-2 font-serif text-2xl font-bold text-brand-teal">Ambil langkah pertamamu</h2>
-            <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-600">Lengkapi profil, temukan peluang yang cocok, lalu pantau prosesnya di satu tempat.</p>
-            <div class="mt-5 flex flex-wrap gap-3">
-                <x-button as="a" :href="route('lowongan.index')" variant="primary">Cari lowongan</x-button>
-                <x-button as="a" :href="route('pelatihan.index')" variant="secondary">Jelajahi pelatihan</x-button>
-            </div>
-        </section>
-    @endunless
-
     <section>
-        <x-page-header level="2" title="Lowongan terbaru" description="Peluang kerja yang baru diterbitkan.">
-            <x-slot:actions><x-button as="a" :href="route('lowongan.index')" variant="ghost" size="sm">Lihat semua</x-button></x-slot:actions>
-        </x-page-header>
+        <div class="mb-3 flex items-center justify-between gap-3">
+            <h2 class="font-heading text-xl font-bold text-brand-teal">Lowongan terbaru</h2>
+            <div class="flex items-center gap-2">
+                @if($latestJobs->isNotEmpty())
+                <button type="button" class="hidden h-10 w-10 items-center justify-center rounded-full border border-brand-line bg-white text-brand-teal hover:bg-brand-teal-soft lg:inline-flex" aria-label="Geser lowongan ke kiri" @click="$refs.latestJobs.scrollBy({ left: -320, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })">
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 18-6-6 6-6" /></svg>
+                </button>
+                <button type="button" class="hidden h-10 w-10 items-center justify-center rounded-full border border-brand-line bg-white text-brand-teal hover:bg-brand-teal-soft lg:inline-flex" aria-label="Geser lowongan ke kanan" @click="$refs.latestJobs.scrollBy({ left: 320, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })">
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 18 6-6-6-6" /></svg>
+                </button>
+                @endif
+                <a href="{{ route('lowongan.index') }}" class="inline-flex min-h-10 items-center text-sm font-semibold text-brand-teal hover:underline">Lihat semua</a>
+            </div>
+        </div>
         @if($latestJobs->isNotEmpty())
-            <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            <div x-ref="latestJobs" role="region" aria-label="Lowongan terbaru" tabindex="0" class="x-scroll-row">
                 @foreach($latestJobs as $job)
                     <x-job-card :job="$job" layout="beranda" />
                 @endforeach
             </div>
         @else
-            <x-empty-state>Belum ada lowongan. Pantau terus ya!</x-empty-state>
+            <p class="rounded-xl border border-brand-line bg-white px-4 py-3 text-sm text-slate-600">Belum ada lowongan.</p>
         @endif
     </section>
 
     <section>
-        <x-page-header level="2" title="Program magang" description="Mulai membangun pengalaman dan mengembangkan keterampilan.">
-            <x-slot:actions><x-button as="a" :href="route('magang.index')" variant="ghost" size="sm">Lihat semua</x-button></x-slot:actions>
-        </x-page-header>
+        <div class="mb-3 flex items-center justify-between gap-3">
+            <h2 class="font-heading text-xl font-bold text-brand-teal">Program magang</h2>
+            <div class="flex items-center gap-2">
+                @if($internships->isNotEmpty())
+                <button type="button" class="hidden h-10 w-10 items-center justify-center rounded-full border border-brand-line bg-white text-brand-teal hover:bg-brand-teal-soft lg:inline-flex" aria-label="Geser program magang ke kiri" @click="$refs.internships.scrollBy({ left: -320, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })">
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 18-6-6 6-6" /></svg>
+                </button>
+                <button type="button" class="hidden h-10 w-10 items-center justify-center rounded-full border border-brand-line bg-white text-brand-teal hover:bg-brand-teal-soft lg:inline-flex" aria-label="Geser program magang ke kanan" @click="$refs.internships.scrollBy({ left: 320, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })">
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 18 6-6-6-6" /></svg>
+                </button>
+                @endif
+                <a href="{{ route('magang.index') }}" class="inline-flex min-h-10 items-center text-sm font-semibold text-brand-teal hover:underline">Lihat semua</a>
+            </div>
+        </div>
         @if($internships->isNotEmpty())
-            <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            <div x-ref="internships" role="region" aria-label="Program magang" tabindex="0" class="x-scroll-row">
                 @foreach($internships as $internship)
                     <x-job-card :job="$internship" layout="beranda" />
                 @endforeach
             </div>
         @else
-            <x-empty-state>Belum ada program magang. Pantau terus ya!</x-empty-state>
+            <p class="rounded-xl border border-brand-line bg-white px-4 py-3 text-sm text-slate-600">Belum ada program magang.</p>
         @endif
     </section>
 
     <section>
-        <x-page-header level="2" title="Pelatihan mendatang" description="Kelas terbit dengan jadwal yang akan datang.">
-            <x-slot:actions><x-button as="a" :href="route('pelatihan.index')" variant="ghost" size="sm">Lihat semua</x-button></x-slot:actions>
-        </x-page-header>
+        <div class="mb-3 flex items-center justify-between gap-3">
+            <h2 class="font-heading text-xl font-bold text-brand-teal">Pelatihan mendatang</h2>
+            <div class="flex items-center gap-2">
+                @if($popularTrainings->isNotEmpty())
+                <button type="button" class="hidden h-10 w-10 items-center justify-center rounded-full border border-brand-line bg-white text-brand-teal hover:bg-brand-teal-soft lg:inline-flex" aria-label="Geser pelatihan ke kiri" @click="$refs.trainings.scrollBy({ left: -320, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })">
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 18-6-6 6-6" /></svg>
+                </button>
+                <button type="button" class="hidden h-10 w-10 items-center justify-center rounded-full border border-brand-line bg-white text-brand-teal hover:bg-brand-teal-soft lg:inline-flex" aria-label="Geser pelatihan ke kanan" @click="$refs.trainings.scrollBy({ left: 320, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })">
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 18 6-6-6-6" /></svg>
+                </button>
+                @endif
+                <a href="{{ route('pelatihan.index') }}" class="inline-flex min-h-10 items-center text-sm font-semibold text-brand-teal hover:underline">Lihat semua</a>
+            </div>
+        </div>
         @if($popularTrainings->isNotEmpty())
-            <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            <div x-ref="trainings" role="region" aria-label="Pelatihan mendatang" tabindex="0" class="x-scroll-row">
                 @foreach($popularTrainings as $training)
-                    <x-training-card :training="$training" />
+                    <div class="x-scroll-card"><x-training-card :training="$training" /></div>
                 @endforeach
             </div>
         @else
-            <x-empty-state>Belum ada pelatihan mendatang.</x-empty-state>
+            <p class="rounded-xl border border-brand-line bg-white px-4 py-3 text-sm text-slate-600">Belum ada pelatihan mendatang.</p>
         @endif
     </section>
 </div>

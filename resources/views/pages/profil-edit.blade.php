@@ -3,18 +3,18 @@
 @section('title', 'Edit Profil')
 
 @section('content')
-<div class="mx-auto max-w-3xl space-y-6">
+<div class="mx-auto max-w-5xl space-y-5">
     <x-page-header title="Informasi Pribadi" description="Perbarui informasi diri, keterampilan, pendidikan, dan pengalamanmu." eyebrow="Profil karier">
         <x-slot:actions>
             <x-button as="a" :href="route('profil.index')" variant="secondary">Lihat profil</x-button>
         </x-slot:actions>
     </x-page-header>
 
-    <form method="POST" action="{{ route('profil.update') }}" enctype="multipart/form-data" class="cu-card space-y-5 p-5 sm:p-8">
+    <form method="POST" action="{{ route('profil.update') }}" enctype="multipart/form-data" class="cu-card grid gap-4 p-4 sm:grid-cols-2 sm:p-5">
         @csrf
         @method('PATCH')
 
-        <div class="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+        <div class="flex flex-col items-start gap-4 sm:col-span-2 sm:flex-row sm:items-center">
             @if($user->avatar)
                 <img src="{{ asset('storage/'.$user->avatar) }}" alt="{{ $user->name }}" class="h-20 w-20 rounded-2xl object-cover">
             @else
@@ -31,14 +31,14 @@
             </div>
         </div>
 
-        <div>
+        <div class="sm:col-span-2">
             <label for="name" class="mb-1.5 block text-sm font-semibold text-slate-700">Nama Lengkap</label>
             <input id="name" name="name" type="text" value="{{ old('name', $user->name) }}" required
                    class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:border-[#124143] focus:outline-none focus:ring-2 focus:ring-[#124143]/20">
             @error('name') <p class="mt-1 text-xs text-rose-600">{{ $message }}</p> @enderror
         </div>
 
-        <div class="grid gap-5 sm:grid-cols-2">
+        <div class="grid gap-4 sm:col-span-2 sm:grid-cols-2">
             <div>
                 <label for="phone" class="mb-1.5 block text-sm font-semibold text-slate-700">No. Telepon</label>
                 <input id="phone" name="phone" type="tel" value="{{ old('phone', $user->phone) }}" required
@@ -71,7 +71,7 @@
             @error('location') <p class="mt-1 text-xs text-rose-600">{{ $message }}</p> @enderror
         </div>
 
-        <div>
+        <div class="sm:col-span-2">
             <label for="bio" class="mb-1.5 block text-sm font-semibold text-slate-700">Tentang Saya</label>
             <textarea id="bio" name="bio" rows="5"
                       class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:border-[#124143] focus:outline-none focus:ring-2 focus:ring-[#124143]/20">{{ old('bio', $user->bio) }}</textarea>
@@ -84,8 +84,8 @@
             $experienceRows = old('experiences', $user->experiences->map(fn ($item) => $item->only(['id', 'position', 'company', 'period', 'description']))->all());
         @endphp
 
-        <section class="space-y-3 border-t border-slate-200 pt-5">
-            <div class="flex items-center justify-between"><h2 class="font-serif text-xl font-bold text-[#124143]">Skill</h2><button type="button" data-add-row="skills" class="text-sm font-bold text-[#124143] underline">Tambah skill</button></div>
+        <section class="space-y-3 border-t border-slate-200 pt-4 sm:col-span-2">
+            <div class="flex items-center justify-between"><h2 class="font-heading text-xl font-bold text-[#124143]">Skill</h2><button type="button" data-add-row="skills" class="text-sm font-bold text-[#124143] underline">Tambah skill</button></div>
             <div id="skills" class="space-y-3">
                 @foreach($skillRows as $index => $row)
                     <div class="flex gap-2"><input type="hidden" name="skills[{{ $index }}][id]" value="{{ $row['id'] ?? '' }}"><input name="skills[{{ $index }}][skill_name]" value="{{ $row['skill_name'] ?? '' }}" placeholder="Contoh: Komunikasi" class="min-w-0 flex-1 rounded-xl border border-slate-300 px-4 py-3 text-sm"><button type="button" data-remove-row class="rounded-lg px-3 text-rose-600">Hapus</button></div>
@@ -94,8 +94,8 @@
             <template id="skills-template"><div class="flex gap-2"><input type="hidden" name="skills[__INDEX__][id]" value=""><input name="skills[__INDEX__][skill_name]" placeholder="Nama skill" class="min-w-0 flex-1 rounded-xl border border-slate-300 px-4 py-3 text-sm"><button type="button" data-remove-row class="rounded-lg px-3 text-rose-600">Hapus</button></div></template>
         </section>
 
-        <section class="space-y-3 border-t border-slate-200 pt-5">
-            <div class="flex items-center justify-between"><h2 class="font-serif text-xl font-bold text-[#124143]">Pendidikan</h2><button type="button" data-add-row="educations" class="text-sm font-bold text-[#124143] underline">Tambah pendidikan</button></div>
+        <section class="space-y-3 border-t border-slate-200 pt-4 sm:col-span-2">
+            <div class="flex items-center justify-between"><h2 class="font-heading text-xl font-bold text-[#124143]">Pendidikan</h2><button type="button" data-add-row="educations" class="text-sm font-bold text-[#124143] underline">Tambah pendidikan</button></div>
             <div id="educations" class="space-y-3">
                 @foreach($educationRows as $index => $row)
                     <div class="grid gap-2 rounded-xl border border-slate-200 p-3 sm:grid-cols-2"><input type="hidden" name="educations[{{ $index }}][id]" value="{{ $row['id'] ?? '' }}"><input name="educations[{{ $index }}][institution]" value="{{ $row['institution'] ?? '' }}" placeholder="Institusi" class="rounded-lg border border-slate-300 px-3 py-2 text-sm"><input name="educations[{{ $index }}][major]" value="{{ $row['major'] ?? '' }}" placeholder="Jurusan" class="rounded-lg border border-slate-300 px-3 py-2 text-sm"><input name="educations[{{ $index }}][start_year]" value="{{ $row['start_year'] ?? '' }}" placeholder="Tahun mulai" class="rounded-lg border border-slate-300 px-3 py-2 text-sm"><input name="educations[{{ $index }}][end_year]" value="{{ $row['end_year'] ?? '' }}" placeholder="Tahun selesai (opsional)" class="rounded-lg border border-slate-300 px-3 py-2 text-sm"><button type="button" data-remove-row class="text-left text-sm text-rose-600">Hapus pendidikan</button></div>
@@ -104,8 +104,8 @@
             <template id="educations-template"><div class="grid gap-2 rounded-xl border border-slate-200 p-3 sm:grid-cols-2"><input type="hidden" name="educations[__INDEX__][id]" value=""><input name="educations[__INDEX__][institution]" placeholder="Institusi" class="rounded-lg border border-slate-300 px-3 py-2 text-sm"><input name="educations[__INDEX__][major]" placeholder="Jurusan" class="rounded-lg border border-slate-300 px-3 py-2 text-sm"><input name="educations[__INDEX__][start_year]" placeholder="Tahun mulai" class="rounded-lg border border-slate-300 px-3 py-2 text-sm"><input name="educations[__INDEX__][end_year]" placeholder="Tahun selesai (opsional)" class="rounded-lg border border-slate-300 px-3 py-2 text-sm"><button type="button" data-remove-row class="text-left text-sm text-rose-600">Hapus pendidikan</button></div></template>
         </section>
 
-        <section class="space-y-3 border-t border-slate-200 pt-5">
-            <div class="flex items-center justify-between"><h2 class="font-serif text-xl font-bold text-[#124143]">Pengalaman</h2><button type="button" data-add-row="experiences" class="text-sm font-bold text-[#124143] underline">Tambah pengalaman</button></div>
+        <section class="space-y-3 border-t border-slate-200 pt-4 sm:col-span-2">
+            <div class="flex items-center justify-between"><h2 class="font-heading text-xl font-bold text-[#124143]">Pengalaman</h2><button type="button" data-add-row="experiences" class="text-sm font-bold text-[#124143] underline">Tambah pengalaman</button></div>
             <div id="experiences" class="space-y-3">
                 @foreach($experienceRows as $index => $row)
                     <div class="grid gap-2 rounded-xl border border-slate-200 p-3 sm:grid-cols-2"><input type="hidden" name="experiences[{{ $index }}][id]" value="{{ $row['id'] ?? '' }}"><input name="experiences[{{ $index }}][position]" value="{{ $row['position'] ?? '' }}" placeholder="Posisi" class="rounded-lg border border-slate-300 px-3 py-2 text-sm"><input name="experiences[{{ $index }}][company]" value="{{ $row['company'] ?? '' }}" placeholder="Perusahaan" class="rounded-lg border border-slate-300 px-3 py-2 text-sm"><input name="experiences[{{ $index }}][period]" value="{{ $row['period'] ?? '' }}" placeholder="Periode" class="rounded-lg border border-slate-300 px-3 py-2 text-sm sm:col-span-2"><textarea name="experiences[{{ $index }}][description]" placeholder="Deskripsi" class="rounded-lg border border-slate-300 px-3 py-2 text-sm sm:col-span-2">{{ $row['description'] ?? '' }}</textarea><button type="button" data-remove-row class="text-left text-sm text-rose-600">Hapus pengalaman</button></div>
@@ -114,7 +114,7 @@
             <template id="experiences-template"><div class="grid gap-2 rounded-xl border border-slate-200 p-3 sm:grid-cols-2"><input type="hidden" name="experiences[__INDEX__][id]" value=""><input name="experiences[__INDEX__][position]" placeholder="Posisi" class="rounded-lg border border-slate-300 px-3 py-2 text-sm"><input name="experiences[__INDEX__][company]" placeholder="Perusahaan" class="rounded-lg border border-slate-300 px-3 py-2 text-sm"><input name="experiences[__INDEX__][period]" placeholder="Periode" class="rounded-lg border border-slate-300 px-3 py-2 text-sm sm:col-span-2"><textarea name="experiences[__INDEX__][description]" placeholder="Deskripsi" class="rounded-lg border border-slate-300 px-3 py-2 text-sm sm:col-span-2"></textarea><button type="button" data-remove-row class="text-left text-sm text-rose-600">Hapus pengalaman</button></div></template>
         </section>
 
-        <x-button type="submit" variant="peach" size="lg" class="w-full">Simpan Perubahan</x-button>
+        <div class="sm:col-span-2"><x-button type="submit" variant="peach" size="lg">Simpan Perubahan</x-button></div>
     </form>
 </div>
 <script>

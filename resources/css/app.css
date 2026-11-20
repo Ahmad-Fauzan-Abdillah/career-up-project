@@ -1,3 +1,5 @@
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/plus-jakarta-sans';
 @import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -14,8 +16,8 @@
     --color-brand-peach-dark: #b95319;
     --color-brand-line: #e3e8e7;
 
-    --font-serif: 'Playfair Display', Georgia, Cambria, 'Times New Roman', serif;
-    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-sans: 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-heading: 'Plus Jakarta Sans Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --text-display: clamp(2.5rem, 5vw, 4.25rem);
     --text-display--line-height: 1.08;
     --text-title: clamp(1.75rem, 3vw, 2.5rem);
@@ -35,7 +37,9 @@
 
 @layer base {
     html {
+        background: var(--color-brand-cream);
         scroll-behavior: smooth;
+        scrollbar-gutter: stable;
     }
 
     body {
@@ -43,8 +47,15 @@
         background: var(--color-brand-cream);
         color: #172a2a;
         font-family: var(--font-sans);
+        font-size: 1rem;
+        line-height: 1.6;
         -webkit-font-smoothing: antialiased;
         text-rendering: optimizeLegibility;
+    }
+
+    :where(h1, h2, h3, h4, h5, h6) {
+        font-family: var(--font-heading);
+        font-weight: 600;
     }
 
     a,
@@ -75,17 +86,71 @@
         opacity: .58;
     }
 
+    button {
+        min-height: 2.5rem;
+    }
+
     [x-cloak] {
         display: none !important;
     }
 }
 
 @layer components {
+    .x-container {
+        width: 100%;
+        max-width: 80rem;
+        margin-inline: auto;
+        padding-inline: 1rem;
+    }
+
+    .x-section {
+        padding-block: 1.5rem;
+    }
+
+    .x-scroll-row {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        padding-bottom: .5rem;
+        scroll-padding-inline: 1rem;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+    }
+
+    .x-scroll-row::-webkit-scrollbar {
+        display: none;
+    }
+
+    .x-scroll-card {
+        flex: 0 0 min(20rem, calc(100vw - 3.5rem));
+        scroll-snap-align: start;
+    }
+
+    .x-job-row {
+        display: flex;
+        flex-direction: column;
+        gap: .75rem;
+        padding: 1rem;
+    }
+
+    .x-page-header {
+        margin-bottom: 1.25rem;
+    }
+
+    .x-card,
     .cu-card {
         border: 1px solid var(--color-brand-line);
         border-radius: var(--radius-panel);
         background: white;
         box-shadow: var(--shadow-card);
+    }
+
+    .x-sidebar {
+        view-transition-name: site-sidebar;
+    }
+
+    .x-topbar {
+        view-transition-name: site-topbar;
     }
 
     .cu-field {
@@ -133,8 +198,38 @@
 
     .cu-table th,
     .cu-table td {
-        padding: .875rem 1rem;
+        padding: .625rem .75rem;
         vertical-align: middle;
+    }
+
+    .cu-table th {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: #f6f8f7;
+    }
+
+    .cu-table-scroll {
+        max-height: min(70vh, 52rem);
+        overflow: auto;
+    }
+
+    @media (min-width: 64rem) {
+        .x-job-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(8rem, .75fr) minmax(9rem, .85fr) auto;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .x-job-row .x-job-row__details {
+            gap: .375rem;
+            font-size: .75rem;
+        }
+
+        .x-job-row .x-job-row__footer {
+            justify-content: flex-end;
+        }
     }
 
     .cu-table tbody tr + tr {
@@ -182,6 +277,33 @@
     }
 }
 
+@media (min-width: 40rem) {
+    .x-container {
+        padding-inline: 1.5rem;
+    }
+}
+
+@media (min-width: 64rem) {
+    .x-container {
+        padding-inline: 2rem;
+    }
+}
+
+.x-card,
+.cu-card {
+    padding: clamp(1rem, 1.5vw, 1.25rem);
+}
+
+@view-transition {
+    navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 180ms;
+    animation-timing-function: ease-out;
+}
+
 @keyframes cu-shimmer {
     to { transform: translateX(100%); }
 }
@@ -196,6 +318,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        animation: none;
+    }
+
     *,
     *::before,
     *::after {

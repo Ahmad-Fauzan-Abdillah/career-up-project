@@ -15,14 +15,14 @@
         : asset('images/landing-training.jpg');
 @endphp
 
-<a href="{{ $url }}" class="group flex h-full flex-col overflow-hidden rounded-panel border border-brand-line bg-white shadow-card transition duration-200 hover:-translate-y-0.5 hover:shadow-float focus-visible:outline-brand-teal">
-    <div class="relative h-44 overflow-hidden bg-brand-teal-soft">
-        <img src="{{ $thumbnail }}" alt="{{ $training->title }}" class="h-full w-full object-cover transition duration-200 group-hover:scale-[1.02]">
+<a href="{{ $url }}" class="group flex h-full flex-col overflow-hidden rounded-panel border border-brand-line bg-white shadow-card transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-float focus-visible:outline-brand-teal">
+    <div class="relative aspect-[16/9] overflow-hidden bg-brand-teal-soft">
+        <img src="{{ $thumbnail }}" alt="{{ $training->title }}" class="h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.02]">
         <span class="absolute left-3 top-3">
             <x-badge :variant="$training->category === 'Premium' ? 'premium' : 'gratis'" size="sm">{{ $training->category }}</x-badge>
         </span>
     </div>
-    <div class="flex flex-1 flex-col p-5 sm:p-6">
+    <div class="flex flex-1 flex-col p-4 sm:p-5">
         <div class="mb-3 flex flex-wrap gap-2">
             @if($isFinished)
                 <x-badge variant="default" size="sm">Selesai</x-badge>
@@ -35,7 +35,7 @@
                 <x-badge variant="danger" size="sm">Kuota penuh</x-badge>
             @endif
         </div>
-        <h3 class="font-serif text-lg font-bold leading-snug text-brand-teal group-hover:underline">{{ $training->title }}</h3>
+        <h3 class="font-heading text-lg font-bold leading-snug text-brand-teal group-hover:underline">{{ $training->title }}</h3>
         <p class="mt-2 text-sm text-slate-600">
             {{ $training->formatted_schedule_date ?: 'Jadwal belum tersedia' }}
             @if($training->formatted_schedule_time)
@@ -50,7 +50,7 @@
                 Mentor: <span class="font-semibold text-slate-800">{{ $training->mentor_name }}</span>
             </p>
         @else
-            <span class="mt-auto block pt-4 text-sm font-bold text-brand-teal">Lihat detail <span aria-hidden="true">→</span></span>
+            <span class="mt-auto block pt-4 text-sm font-bold text-brand-teal">Lihat detail</span>
         @endif
     </div>
 </a>

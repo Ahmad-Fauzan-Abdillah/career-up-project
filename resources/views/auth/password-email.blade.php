@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="space-y-5">
-    <div><h1 class="font-serif text-3xl font-bold text-white">Lupa kata sandi?</h1><p class="mt-2 text-sm text-[#F5F3EE]/80">Kami akan mengirim tautan untuk mengatur ulang kata sandi ke email Anda.</p></div>
+    <div><h1 class="font-heading text-3xl font-bold text-white">Lupa kata sandi?</h1><p class="mt-2 text-sm text-[#F5F3EE]/80">Kami akan mengirim tautan untuk mengatur ulang kata sandi ke email Anda.</p></div>
     @if(session('status'))<p role="status" class="rounded-xl bg-emerald-50 p-3 text-sm text-emerald-800">{{ session('status') }}</p>@endif
     <form method="POST" action="{{ route('password.email') }}" class="space-y-4">@csrf
         <label class="block text-sm font-semibold text-white" for="email">Email</label>

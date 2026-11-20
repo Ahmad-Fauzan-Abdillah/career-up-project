@@ -3,41 +3,39 @@
 @section('title', 'Pengaturan')
 
 @section('content')
-<div class="mx-auto max-w-3xl space-y-6">
+<div class="mx-auto max-w-4xl space-y-5">
     <x-page-header title="Pengaturan" description="Kelola akun dan preferensi Anda" eyebrow="Akun" />
 
-    <div class="cu-card divide-y divide-slate-200 overflow-hidden">
-        <a href="{{ route('pengaturan.password') }}" class="flex items-center justify-between gap-4 p-5 transition hover:bg-slate-50 sm:p-6">
-            <div>
-                <h2 class="font-semibold text-[#124143]">Ubah Password</h2>
-                <p class="mt-1 text-sm text-slate-500">Perbarui kata sandi akun Anda</p>
+    <div class="grid gap-4 lg:grid-cols-2">
+        <section class="cu-card p-4">
+            <h2 class="mb-3 font-heading text-lg font-bold text-brand-teal">Keamanan</h2>
+            <div class="divide-y divide-slate-200">
+                <a href="{{ route('pengaturan.password') }}" class="block py-3 transition-colors hover:text-brand-teal">
+                    <span class="block font-semibold text-[#124143]">Ubah Password</span>
+                    <span class="mt-1 block text-sm text-slate-500">Perbarui kata sandi akun Anda</span>
+                </a>
+                <a href="{{ route('pengaturan.email') }}" class="block py-3 transition-colors hover:text-brand-teal">
+                    <span class="block font-semibold text-[#124143]">Verifikasi Email</span>
+                    <span class="mt-1 block text-sm text-slate-500">{{ $user->email }}</span>
+                </a>
             </div>
-            <svg class="h-5 w-5 shrink-0 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 18 6-6-6-6" />
-            </svg>
-        </a>
-        <a href="{{ route('pengaturan.email') }}" class="flex items-center justify-between gap-4 p-5 transition hover:bg-slate-50 sm:p-6">
-            <div>
-                <h2 class="font-semibold text-[#124143]">Verifikasi Email</h2>
-                <p class="mt-1 text-sm text-slate-500">{{ $user->email }}</p>
+        </section>
+        <section class="cu-card p-4">
+            <h2 class="mb-3 font-heading text-lg font-bold text-brand-teal">Preferensi</h2>
+            <div class="flex items-center justify-between gap-4">
+                <div>
+                    <h3 class="font-semibold text-[#124143]">Notifikasi</h3>
+                    <p class="mt-1 text-sm text-slate-500">Atur notifikasi CareerUp untuk akun Anda</p>
+                    <p id="notification-error" class="mt-2 hidden text-sm text-rose-600" role="alert"></p>
+                </div>
+                <label class="inline-flex shrink-0 cursor-pointer items-center gap-3">
+                    <span id="notification-label" class="text-sm font-semibold text-slate-600">{{ $user->is_notification_active ? 'On' : 'Off' }}</span>
+                    <input id="notification-toggle" type="checkbox" class="peer sr-only" @checked($user->is_notification_active)
+                           aria-label="Aktifkan notifikasi">
+                    <span class="relative h-6 w-11 rounded-full bg-slate-300 transition peer-checked:bg-[#124143] peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#124143]/20 after:absolute after:left-1 after:top-1 after:h-4 after:w-4 after:rounded-full after:bg-white after:transition-transform peer-checked:after:translate-x-5"></span>
+                </label>
             </div>
-            <svg class="h-5 w-5 shrink-0 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 18 6-6-6-6" />
-            </svg>
-        </a>
-        <div class="flex items-center justify-between gap-4 p-5 sm:p-6">
-            <div>
-                <h2 class="font-semibold text-[#124143]">Notifikasi</h2>
-                <p class="mt-1 text-sm text-slate-500">Atur notifikasi CareerUp untuk akun Anda</p>
-                <p id="notification-error" class="mt-2 hidden text-sm text-rose-600" role="alert"></p>
-            </div>
-            <label class="inline-flex shrink-0 cursor-pointer items-center gap-3">
-                <span id="notification-label" class="text-sm font-semibold text-slate-600">{{ $user->is_notification_active ? 'On' : 'Off' }}</span>
-                <input id="notification-toggle" type="checkbox" class="peer sr-only" @checked($user->is_notification_active)
-                       aria-label="Aktifkan notifikasi">
-                <span class="relative h-6 w-11 rounded-full bg-slate-300 transition peer-checked:bg-[#124143] peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#124143]/20 after:absolute after:left-1 after:top-1 after:h-4 after:w-4 after:rounded-full after:bg-white after:transition-transform peer-checked:after:translate-x-5"></span>
-            </label>
-        </div>
+        </section>
     </div>
 </div>
 <script>

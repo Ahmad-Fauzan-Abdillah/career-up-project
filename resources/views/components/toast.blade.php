@@ -7,6 +7,7 @@
     <div
         x-data="{ visible: true }"
         x-show="visible"
+        x-cloak
         x-transition.opacity.duration.180ms
         x-init="setTimeout(() => visible = false, 6000)"
         role="{{ $isError ? 'alert' : 'status' }}"

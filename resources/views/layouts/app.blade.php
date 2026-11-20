@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id" class="h-full">
+<html lang="id" class="h-full bg-brand-cream">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,14 +14,15 @@
     <meta property="og:image" content="{{ asset('images/logo.png') }}">
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
 
+    @include('components.font-preload')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="h-full bg-[#F5F3EE] font-sans text-slate-800 antialiased selection:bg-[#F4A261] selection:text-[#124143]"
+<body class="h-dvh overflow-hidden bg-[#F5F3EE] font-sans text-slate-800 antialiased selection:bg-[#F4A261] selection:text-[#124143]"
       x-data="{ sidebarOpen: false }"
       @keydown.escape.window="sidebarOpen = false">
     <x-toast />
 
-    <div class="min-h-full flex">
+    <div class="flex h-full min-h-0">
         <!-- Backdrop mobile drawer -->
         <div
             x-show="sidebarOpen"
@@ -39,10 +40,11 @@
         <!-- Sidebar Deep Teal (Matches 12-beranda.png) -->
         <aside
             id="app-navigation"
+            x-cloak
             :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'"
-            class="fixed inset-y-0 left-0 z-50 w-64 bg-[#124143] text-[#F5F3EE] flex flex-col justify-between py-6 px-4 shadow-xl transition-transform duration-200 ease-in-out lg:static lg:translate-x-0 shrink-0">
+            class="x-sidebar fixed inset-y-0 left-0 z-50 flex h-full w-64 shrink-0 flex-col justify-between overflow-hidden bg-[#124143] px-4 py-6 text-[#F5F3EE] shadow-xl transition-transform duration-200 ease-in-out lg:translate-x-0">
 
-            <div>
+            <div class="min-h-0 flex-1 overflow-y-auto">
                 <!-- Header / Logo -->
                 <div class="flex items-center justify-between px-2 mb-8">
                     <a href="{{ route('beranda') }}">
@@ -63,7 +65,7 @@
                 </div>
 
                 <!-- Navigation Menu (Pill abu terang untuk menu aktif) -->
-                <nav class="space-y-2 text-base">
+                <nav class="space-y-1.5 text-sm">
                     <!-- 1. Beranda -->
                     @php
                         $isBeranda = request()->routeIs('beranda');
@@ -145,7 +147,7 @@
             </div>
 
             <!-- Bottom: Form POST Logout -->
-            <div class="pt-6 border-t border-white/10">
+            <div class="shrink-0 border-t border-white/10 pt-4">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button
@@ -158,10 +160,10 @@
         </aside>
 
         <!-- Main Content Area -->
-        <div class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+        <div class="ml-0 flex min-h-0 min-w-0 flex-1 flex-col overflow-y-auto lg:ml-64">
             <!-- Search and account controls -->
-            <header class="bg-white border-b border-slate-200/80 sticky top-0 z-30">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+            <header class="x-topbar sticky top-0 z-30 border-b border-slate-200/80 bg-white">
+                <div class="x-container flex h-16 items-center justify-between gap-4">
                     <!-- Mobile Hamburger -->
                     <div class="flex items-center gap-3 lg:hidden">
                         <button
@@ -225,7 +227,7 @@
 
                         <!-- User Circular Avatar -->
                         <a href="{{ route('profil.index') }}" class="flex items-center group">
-                            <div class="w-10 h-10 rounded-full bg-[#124143] text-white flex items-center justify-center font-bold text-sm ring-2 ring-slate-200 overflow-hidden shrink-0 group-hover:ring-[#124143] transition-all">
+                            <div class="w-10 h-10 rounded-full bg-[#124143] text-white flex items-center justify-center font-bold text-sm ring-2 ring-slate-200 overflow-hidden shrink-0 group-hover:ring-[#124143] transition-[box-shadow]">
                                 @if(auth()->user()->avatar)
                                     <img src="{{ asset('storage/' . auth()->user()->avatar) }}" alt="{{ auth()->user()->name }}" class="w-full h-full object-cover">
                                 @else
@@ -251,8 +253,8 @@
             </header>
 
             <!-- Main Content Area berlatar Cream (F5F3EE) -->
-            <main class="flex-1 @yield('main-class', 'bg-[#F5F3EE] p-4 sm:p-6 lg:p-8')">
-                <div class="@yield('content-container-class', 'max-w-7xl mx-auto')">
+            <main class="min-h-0 flex-1 @yield('main-class', 'bg-[#F5F3EE] py-6')">
+                <div class="@yield('content-container-class', 'x-container')">
                     @yield('content')
                 </div>
             </main>

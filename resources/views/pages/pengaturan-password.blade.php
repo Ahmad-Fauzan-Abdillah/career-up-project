@@ -3,15 +3,15 @@
 @section('title', 'Ubah Password')
 
 @section('content')
-<div class="mx-auto max-w-2xl space-y-6">
+<div class="mx-auto max-w-3xl space-y-4">
     <x-page-header title="Ubah kata sandi" description="Gunakan kata sandi yang kuat untuk menjaga keamanan akun." eyebrow="Keamanan akun">
         <x-slot:actions><x-button as="a" :href="route('pengaturan.index')" variant="secondary">Pengaturan</x-button></x-slot:actions>
     </x-page-header>
 
-    <form method="POST" action="{{ route('pengaturan.password.update') }}" class="cu-card space-y-5 p-5 sm:p-8">
+    <form method="POST" action="{{ route('pengaturan.password.update') }}" class="cu-card grid gap-4 p-4 sm:grid-cols-2">
         @csrf
         @method('PATCH')
-        <div>
+        <div class="sm:col-span-2">
             <label for="current_password" class="mb-1.5 block text-sm font-semibold text-slate-700">Password Saat Ini</label>
             <input id="current_password" name="current_password" type="password" autocomplete="current-password" required
                    class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:border-[#124143] focus:outline-none focus:ring-2 focus:ring-[#124143]/20">
@@ -29,7 +29,7 @@
                    class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm focus:border-[#124143] focus:outline-none focus:ring-2 focus:ring-[#124143]/20">
         </div>
 
-        <section class="rounded-xl border border-slate-200 bg-[#F5F3EE] p-4" aria-labelledby="password-criteria-heading">
+        <section class="rounded-xl border border-slate-200 bg-[#F5F3EE] p-4 sm:col-span-2" aria-labelledby="password-criteria-heading">
             <h2 id="password-criteria-heading" class="text-sm font-bold text-[#124143]">Kriteria Password</h2>
             <ul class="mt-3 space-y-2 text-sm">
                 <li data-password-criterion="length" class="flex items-center gap-2 text-slate-500"><span aria-hidden="true">○</span><span>Minimal 8 karakter</span></li>
@@ -39,7 +39,7 @@
                 <li data-password-criterion="symbol" class="flex items-center gap-2 text-slate-500"><span aria-hidden="true">○</span><span>Memiliki simbol</span></li>
             </ul>
         </section>
-        <x-button type="submit" variant="peach" size="lg" class="w-full">Simpan Password</x-button>
+        <div class="sm:col-span-2"><x-button type="submit" variant="peach" size="lg">Simpan Password</x-button></div>
     </form>
 </div>
 <script>

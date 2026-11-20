@@ -23,7 +23,7 @@
     method="POST"
     enctype="multipart/form-data"
     action="{{ $job->exists ? route('admin.jobs.update', ['type' => $type, 'job' => $job]) : route('admin.jobs.store', ['type' => $type]) }}"
-    class="cu-card grid gap-5 p-5 sm:grid-cols-2 sm:p-7">
+    class="cu-card grid gap-4 p-4 sm:grid-cols-2 sm:p-5">
     @csrf
     @if($job->exists) @method('PUT') @endif
 
